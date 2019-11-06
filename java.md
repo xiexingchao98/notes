@@ -75,6 +75,12 @@ GC 是自动运行的，不能够强制立刻进行垃圾回收。即垃圾回�
 
 https://www.nowcoder.com/questionTerminal/4650487daf784a0bbffdeb523dd536b5
 
+垃圾回收在 JVM 中的优先级非常低。
+
+垃圾回收并不能保证不会发生内存溢出。
+
+进入 DEAD 的线程，仍旧可以恢复，之后 GC 也并不会进行回收。
+
 
 
 Floor / Round / Ceil 区别
@@ -219,7 +225,114 @@ HashMap 线程不安全，冲突采用拉链法解决。KV均允许 null 值。�
 
 
 
-synchronized 代码块
+局部变量需要在初始化后使用，否则会抛出异常。
+
+成员变量可以不初始化使用，它包含默认值。
 
 
 
+运算符
+
+`^` 为异或运算符。
+
+当两个操作数中均为 byte, short, int, char 之一时，它们均会被转换成 int 类型参与运算。
+
+当两个操作数均被 final 修饰时，会根据等式右边的变量类型自动进行结果转换。  
+
+
+
+设计模式
+
+创建型设计模式：
+
++ 单例模式
++ 工厂模式
++ 原型模式
+
+结构型设计模式：
+
++ 桥接模式
++ 适配器模式
++ 装饰模式（不用继承便可实现拓展性，非常灵活）
++ 代理模式
++ AOP 模式
+
+行为型设计模式：
+
++ 观察者模式
+
+
+
+
+
+反射
+
+`getDeclaredMethods` 获取类中所有已经声明的方法对象，包括 public、private、proetcted、default 修饰的方法，不包括从父类、接口继承实现的方法。
+
+`getMethods` 获取所有公开的方法对象，包括从父类、接口继承实现的方法。 
+
+
+
+String
+
+String 底层由 Char 数组构成。 Char 的大小为 2 Byte 。
+
+
+
+Socket 通信
+
+
+
+JVM 内存区域
+
+off-heap 堆外内存。对象序列化后存储在堆外内存中，它不会被 GC 收集清理，再次使用时需要反序列化。
+
+新生代、老生代。
+
+
+
+修饰符
+
+synchronized，修饰代码块或者方法，同一时刻只有一个线程能够执行该段代码。
+
+volatile，修饰的变量每次访问，线程都会从共享内存区域中重新读取值，当该变量的值发生了变化时，会强制线程将心值写入共享内存。以确保不同线程在同一时刻读取到相同的值。
+
+transient，对象序列化时会跳过被该修饰符修饰的变量。
+
+
+
+
+
+Vector / ArrayList
+
+均实现了 List 接口。Vector 支持同步，ArrayList 不支持同步。非多线程情况下，优先使用 ArrayList 。
+
+
+
+Hashtable / HashMap / ConcurrentHashMap
+
+HashMap 实现了 Map 接口，不支持同步。
+
+Hashtable 实现了 Dictonary 接口，支持同步。
+
+ConcurrentHashMap 实现了 Map 接口，支持同步。
+
+非多线程情况下，优先使用 HashMap，高并发场景下使用 ConcurrentHashMap 。
+
+
+
+HashSet
+
+HashSet 实现了 Set 接口，不支持同步。
+
+
+
+Integer 缓存范围 -128 - 127
+
+
+
+JSP 静态、动态包含
+
+静态包含是将文件内容直接并入主文件，再进行翻译，因此不允许同名变量。
+
+动态包含是将 JSP 编译后并入主文件。

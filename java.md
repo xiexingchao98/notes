@@ -67,7 +67,9 @@ Static 方法
 
 `static` 方法中不存在 `this` 引用。
 
-GC
+
+
+## GC
 
 GC 是自动运行的，不能够强制立刻进行垃圾回收。即垃圾回收不能确定具体的时间。
 
@@ -80,6 +82,10 @@ https://www.nowcoder.com/questionTerminal/4650487daf784a0bbffdeb523dd536b5
 垃圾回收并不能保证不会发生内存溢出。
 
 进入 DEAD 的线程，仍旧可以恢复，之后 GC 也并不会进行回收。
+
+
+
+当不再有指针指向某个对象时，在对象空间被收集之前会执行 finalize 方法。
 
 
 
@@ -127,6 +133,8 @@ List 是有序列表，允许重复元素。某些情况下，最好使用迭代
 
 ArrayList：允许任意类型值，包括 null 值。它是不同步的。
 
+ArrayList 默认容量 10 ， 扩容时默认 1.5 倍。
+
 Set 是无序集合，不允许重复元素。
 
 实现了 Set 接口：
@@ -171,7 +179,7 @@ final
 
 
 
-ClassLoader
+## ClassLoader
 
 加载顺序如下：
 
@@ -183,15 +191,25 @@ ClassLoader
 
 装载类时，如果该类不存在，则会抛出异常。
 
+判断两个类是否相同，由类的包名、类名以及类加载器来决定。
+
+类加载器采用双亲委托模型、全盘负责（加载 Class 及其依赖）。
 
 
 
+## JSP
 
-JSP 九大内置对象
++ 九大内置对象
+
++ 静态、动态包含
+
+静态包含是将文件内容直接并入主文件，再进行翻译，因此不允许同名变量。
+
+动态包含是将 JSP 编译后并入主文件。
 
 
 
-异常结构
+## 异常
 
 Throwable
 
@@ -239,9 +257,10 @@ HashMap 线程不安全，冲突采用拉链法解决。KV均允许 null 值。�
 
 当两个操作数均被 final 修饰时，会根据等式右边的变量类型自动进行结果转换。  
 
+`%` 取模运算符号与被除数相同。
 
 
-设计模式
+## 设计模式
 
 创建型设计模式：
 
@@ -311,9 +330,9 @@ Vector / ArrayList
 
 Hashtable / HashMap / ConcurrentHashMap
 
-HashMap 实现了 Map 接口，不支持同步。
+HashMap 实现了 Map 接口，不支持同步，允许 null 的 key 和 value 。
 
-Hashtable 实现了 Dictonary 接口，支持同步。
+Hashtable 实现了 Dictonary 接口，支持同步，不允许 null 的 key 和 value 。
 
 ConcurrentHashMap 实现了 Map 接口，支持同步。
 
@@ -327,12 +346,162 @@ HashSet 实现了 Set 接口，不支持同步。
 
 
 
+TreeMap
+
+TreeSet
+
+
+
 Integer 缓存范围 -128 - 127
 
 
 
-JSP 静态、动态包含
+多态
 
-静态包含是将文件内容直接并入主文件，再进行翻译，因此不允许同名变量。
+针对父类同一方法，不同子类有不同的实现。
 
-动态包含是将 JSP 编译后并入主文件。
+
+
+短路逻辑与、非短路逻辑与
+
+&
+
+&&
+
+
+
+instanceof 
+
+判断实例是否属于某个类
+
+判断类是否属于某个类的子类
+
+
+
+CyclicBarrier / CountDownLatch
+
+Callable
+
+
+
+函数重载
+
+方法名称相同
+
+参数个数、类型、名称不同
+
+重载与返回类型无关，返回类型可以相同也可以不同
+
+
+
+前后台线程
+
+`main()` 是一个前台线程。只要有前台未终止，程序就不会退出。当前台线程都终止后，所有后台线程都会退出，程序终止。
+
+`Thread.isBackground` 属性将线程设置为后台线程。
+
+`new Thread()` 默认创建前台线程。
+
+ThreadLocal
+
+枚举
+
+
+
+泛型
+
+JVM 中只有普通方法和类，不存在泛型。
+
+泛型 会在 JVM 编译阶段被擦除。
+
+
+
+## JDBC
+
+ResultSet 结果集从第 1 行开始数起。
+
+结果集详细介绍
+
+ https://www.nowcoder.com/questionTerminal/0df1f90997014eb98fcf02dbcc61e0d9 
+
+
+
+Statement
+
+PreparedStatement
+
+CallableStatement
+
+
+
+
+
+抽象类
+
+可以包含普通成员、静态变量。
+
+抽象类不可以实例化，但是可以引用指向子类对象。
+
+
+
+接口
+
+可以包含静态变量（public static final）。
+
+
+
+构造方法与普通方法唯一区别就在于没有返回值。普通方法也可以与类名同名。
+
+
+
+## Struts
+
+## Spring
+
+事务传播性
+
+控制反转
+
+依赖注入
+
+
+
+静态内部类：可以不依赖外部类实例化
+
+成员内部类：
+
+匿名内部类
+
+局部内部类
+
+```java
+public class Demo {
+    static class SInner {
+        
+    }
+	class Inner {
+        
+    }
+    public static void main(String args[]) {
+        // 成员内部类实例化
+    	Demo demo = new Demo();
+        Inner inner = demo.new Inner();
+        // 静态内部类实例化
+        SInner sinner = new SInner();
+    }
+}
+```
+
+ https://www.nowcoder.com/questionTerminal/e886e58981c346098a043c3c2ad2d736 
+
+
+
+字符流和字节流
+
+字符流 = 字节流 + 编码
+
+
+
+float 和 long 范围大小
+
+float 4 Byte 范围比 long 8 Byte 大

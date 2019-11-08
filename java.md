@@ -63,6 +63,14 @@ Servlet
 
 `Servlet.getInitConfig()` 获取初始化参数
 
+Servlet 结构
+
+GenericServlet
+
+HttpServlet
+
+
+
 Static 方法
 
 `static` 方法中不存在 `this` 引用。
@@ -217,7 +225,7 @@ Error
 
 Exception
 
- 
+ 编译型异常、检查型异常
 
 
 
@@ -307,6 +315,12 @@ JVM 内存区域
 off-heap 堆外内存。对象序列化后存储在堆外内存中，它不会被 GC 收集清理，再次使用时需要反序列化。
 
 新生代、老生代。
+
+堆
+
+栈
+
+方法区（含常量池）
 
 
 
@@ -505,3 +519,93 @@ public class Demo {
 float 和 long 范围大小
 
 float 4 Byte 范围比 long 8 Byte 大
+
+
+
+多线程有三种实现方式
+
+1. 继承 Thread 类
+2. 实现 Runnable 接口
+3. 实现 Callable 接口，线程结束后有返回值
+
+
+
+访问修饰符
+
+public
+
+protected
+
+default
+
+private
+
+
+
+
+
+String.split()
+
+当正则表达式在目标字符串中无匹配时，直接返回包含原字符串的数组，长度为 1 。
+
+
+
+
+
+正则表达式
+
+贪婪量词
+
+`?` 匹配 1 次或 0 次
+
+`*` 匹配 0 次或多次
+
+`+` 匹配 1 次或多次
+
+
+
+
+
+创建对象的方式
+
+1. New
+2. 静态工厂 NewInstance
+3. 反射 Class.forName()
+4. Clone
+5. 反序列化
+
+
+
+事件处理模型
+
+事件源
+
+事件对象
+
+事件监听器
+
+
+
+Java程序种类
+
+Application（独立运行的程序）
+
+Servlet（Web服务程序）
+
+Applet（嵌入到网页中运行的小程序）
+
+
+
+
+
+Swtich支持作为判断调件的类型
+
+byte short char enum 或者相应包装类型
+
+JDK 1.7 之后，增加了对 String 的支持。
+
+
+
+静态多分派
+
+动态单分派

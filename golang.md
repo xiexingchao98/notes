@@ -481,3 +481,16 @@ add([]int{1,2,3}...)
 ```
 
 https://www.nowcoder.com/questionTerminal/bf57cb74840d4bc8b9c8a13f44e2f316
+
+
+
+为什么 Golang 快？
+
++ 内存消耗少。数据存储紧凑，能够避免过多的间接访问，能更好的利用缓存从而带来更高的性能。
+
++ 内联函数
++ 内存逃逸
++ 轻量的协程
+
+ https://dave.cheney.net/2014/06/07/five-things-that-make-go-fast 
+
